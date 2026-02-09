@@ -10,7 +10,7 @@ static void activate(GtkApplication *app, gpointer user_data) {
 	gtk_window_present(GTK_WINDOW (window));
 
 	GtkWidget *web_view = webkit_web_view_new();
-	webkit_web_view_load_uri(WEBKIT_WEB_VIEW(web_view), "https://www.example.com");
+	webkit_web_view_load_uri(WEBKIT_WEB_VIEW(web_view), "");
 	gtk_window_set_child(GTK_WINDOW(window), web_view);
 	gtk_window_present(GTK_WINDOW(window));
 
