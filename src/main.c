@@ -6,14 +6,13 @@ static void activate(GtkApplication *app, gpointer user_data) {
 
 	window = gtk_application_window_new(app);
 	gtk_window_set_title(GTK_WINDOW (window), "Window");
-	gtk_window_set_default_size(GTK_WINDOW (window), 200, 200);
+	gtk_window_set_default_size(GTK_WINDOW (window), 1280, 1024);
 	gtk_window_present(GTK_WINDOW (window));
 
-	GtkWidget *web_view = webkit_web_view_new();
-	webkit_web_view_load_uri(WEBKIT_WEB_VIEW(web_view), "");
-	gtk_window_set_child(GTK_WINDOW(window), web_view);
-	gtk_window_present(GTK_WINDOW(window));
+	GtkWidget *parentOverlay = gtk_overlay_new();
 
+	gtk_window_set_child(GTK_WINDOW(window), parentOverlay);
+	gtk_window_present(GTK_WINDOW(window));
 }
 
 int main(int argc, char *argv[]) {
