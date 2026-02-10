@@ -1,11 +1,19 @@
 #include "twb.h"
 
+static void search_bar_enter (GtkEntry *search_bar, gpointer user_data) {
+	const char *url = gtk_editable_get_text(GTK_EDITABLE(search_bar));
+	g_print("%s\n", url);
+	gtk_widget_set_visible(GTK_WIDGET(search_bar), FALSE);
+}
+
 void search_bar_setup (GtkWidget *search_bar) {
 	gtk_widget_set_halign(search_bar, GTK_ALIGN_CENTER);
 	gtk_widget_set_valign(search_bar, GTK_ALIGN_CENTER);
 
 	gtk_entry_set_placeholder_text(GTK_ENTRY(search_bar), "Enter URL here...");
 	gtk_widget_set_visible(search_bar, FALSE);
+
+	g_signal_connect(search_bar, "activate", G_CALLBACK(search_bar_enter), NULL);
 }
 
 void search_bar_action (GSimpleAction *action, GVariant *param, gpointer user_data) {
