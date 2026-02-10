@@ -9,7 +9,8 @@ deps = [
 
 sources = [
   'src/main.c',
-  'src/searchbar.c'
+  'src/searchbar.c',
+  'src/webkitutils.c'
 ]
 
 inc = include_directories('./src')

@@ -22,7 +22,7 @@ static void activate(GtkApplication *app, gpointer user_data) {
 
 	/* Search bar */
 	GtkWidget *search_bar = gtk_entry_new();
-	search_bar_setup(search_bar);
+	search_bar_setup(search_bar, parent_overlay);
 	gtk_overlay_add_overlay(GTK_OVERLAY(parent_overlay), search_bar);
 	setup_actions(GTK_WINDOW(window), search_bar);
 
