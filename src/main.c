@@ -1,10 +1,10 @@
 #include "twb.h"
 
 static void setup_actions(GtkWindow *win, GtkWidget *widget) {
-	GSimpleAction *searchAction = g_simple_action_new("search", NULL); /* Search bar action */
+	GSimpleAction *search_action = g_simple_action_new("search", NULL); /* Search bar action */
 
-	g_signal_connect(searchAction, "activate", G_CALLBACK(search_bar_action), NULL); /* Search bar action TODO: not use null */
-	g_action_map_add_action(G_ACTION_MAP(win), G_ACTION(searchAction));
+	g_signal_connect(search_action, "activate", G_CALLBACK(search_bar_action), NULL); /* Search bar action TODO: not use null */
+	g_action_map_add_action(G_ACTION_MAP(win), G_ACTION(search_action));
 }
 
 static void activate(GtkApplication *app, gpointer user_data) {
@@ -15,9 +15,9 @@ static void activate(GtkApplication *app, gpointer user_data) {
 	gtk_window_set_default_size(GTK_WINDOW (window), 1280, 1024);
 	gtk_window_present(GTK_WINDOW (window));
 
-	GtkWidget *parentOverlay = gtk_overlay_new();
+	GtkWidget *parent_overlay = gtk_overlay_new();
 
-	gtk_window_set_child(GTK_WINDOW(window), parentOverlay);
+	gtk_window_set_child(GTK_WINDOW(window), parent_overlay);
 	gtk_window_present(GTK_WINDOW(window));
 
 	setup_actions(GTK_WINDOW(window), NULL); /* TODO: not use null */
