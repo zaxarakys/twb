@@ -3,7 +3,7 @@
 static void setup_actions(GtkWindow *win, GtkWidget *widget) {
 	GSimpleAction *search_action = g_simple_action_new("search", NULL); /* Search bar action */
 
-	g_signal_connect(search_action, "activate", G_CALLBACK(search_bar_action), NULL); /* Search bar action TODO: not use null */
+	g_signal_connect(search_action, "activate", G_CALLBACK(search_bar_action), widget);
 	g_action_map_add_action(G_ACTION_MAP(win), G_ACTION(search_action));
 }
 
