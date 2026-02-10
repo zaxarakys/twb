@@ -12,11 +12,11 @@ typedef struct {
 	guint focusDown;
 	guint focusLeft;
 	guint focusRight;
-	bool isDefaultSplitHorizontal;
+	gboolean isDefaultSplitHorizontal;
 } Config;
 
 Config defaultConfig = {
-	.leaderKey = GDK_MOD1_MASK,
+	.leaderKey = GDK_ALT_MASK,
 	.searchKey = GDK_KEY_s,
 	.splitHorizontal = GDK_KEY_h,
 	.splitVertical = GDK_KEY_v,
@@ -24,7 +24,7 @@ Config defaultConfig = {
 	.focusDown = GDK_KEY_downarrow,
 	.focusLeft = GDK_KEY_leftarrow,
 	.focusRight = GDK_KEY_rightarrow,
-	.isDefaultSplitHorizontal = true
+	.isDefaultSplitHorizontal = TRUE
 };
 
 #endif /* CONFIG_H */
