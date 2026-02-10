@@ -1,5 +1,4 @@
-#include <gtk/gtk.h>
-#include <webkit/webkit.h>
+#include "twb.h"
 
 static void activate(GtkApplication *app, gpointer user_data) {
 	GtkWidget *window;

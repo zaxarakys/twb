@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include <gtk/gtk.h>
+#include "twb.h"
 
 typedef struct {
 	GdkModifierType leaderKey;
