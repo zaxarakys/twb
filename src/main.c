@@ -22,17 +22,11 @@ static void activate(GtkApplication *app, gpointer user_data) {
 
 	/* Search bar */
 	GtkWidget *search_bar = gtk_entry_new();
-
-	gtk_widget_set_halign(search_bar, GTK_ALIGN_CENTER);
-	gtk_widget_set_valign(search_bar, GTK_ALIGN_CENTER);
-
-	gtk_entry_set_placeholder_text(GTK_ENTRY(search_bar), "Enter URL here...");
-	gtk_widget_set_visible(search_bar, FALSE);
+	search_bar_setup(search_bar);
 	gtk_overlay_add_overlay(GTK_OVERLAY(parent_overlay), search_bar);
+	setup_actions(GTK_WINDOW(window), search_bar);
 
 	gtk_window_present(GTK_WINDOW(window));
-
-	setup_actions(GTK_WINDOW(window), search_bar);
 
 	/* TODO: make keycombo depend on config */
 	const char *accels[] = {"<Alt>s", NULL}; /* Search bar action */
