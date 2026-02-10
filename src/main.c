@@ -1,5 +1,12 @@
 #include "twb.h"
 
+static void setup_actions(GtkWindow *win, GtkWidget *widget) {
+	GSimpleAction *searchAction = g_simple_action_new("search", NULL); /* Search bar action */
+
+	g_signal_connect(searchAction, "activate", G_CALLBACK(search_bar_action), NULL); /* Search bar action TODO: not use null */
+	g_action_map_add_action(G_ACTION_MAP(win), G_ACTION(searchAction));
+}
+
 static void activate(GtkApplication *app, gpointer user_data) {
 	GtkWidget *window;
 
@@ -12,6 +19,12 @@ static void activate(GtkApplication *app, gpointer user_data) {
 
 	gtk_window_set_child(GTK_WINDOW(window), parentOverlay);
 	gtk_window_present(GTK_WINDOW(window));
+
+	setup_actions(GTK_WINDOW(window), NULL); /* TODO: not use null */
+
+	/* TODO: make keycombo depend on config */
+	const char *accels[] = {"<Alt>s", NULL}; /* Search bar action */
+	gtk_application_set_accels_for_action(GTK_APPLICATION(app), "win.search", accels);
 }
 
 int main(int argc, char *argv[]) {
