@@ -7,4 +7,12 @@ deps = [
   webkit_dep,
 ]
 
-executable('twb', 'src/main.c', dependencies : deps)
+sources = [
+  'src/main.c',
+  'src/searchbar.c',
+  'src/webkitutils.c'
+]
+
+inc = include_directories('./src')
+
+executable('twb', sources, dependencies : deps, include_directories: inc)
