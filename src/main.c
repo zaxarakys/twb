@@ -1,4 +1,5 @@
 #include "twb.h"
+#include "searchbar.h"
 
 static void setup_actions(GtkWindow *win, GtkWidget *widget) {
 	GSimpleAction *search_action = g_simple_action_new("search", NULL); /* Search bar action */
