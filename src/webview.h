@@ -3,4 +3,4 @@
 
 WebKitWebView *create_web_view(const gchar *url);
 
-#define /* WEBVIEW_H */
+#endif /* WEBVIEW_H */
