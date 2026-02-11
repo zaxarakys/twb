@@ -1,4 +1,5 @@
 #include "twb.h"
+#include "webview.h"
 
 static void search_bar_enter (GtkEntry *search_bar, gpointer user_data) {
 	const gchar *url = gtk_editable_get_text(GTK_EDITABLE(search_bar));
