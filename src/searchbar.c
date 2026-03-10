@@ -10,6 +10,7 @@ static void search_bar_enter (GtkEntry *search_bar, gpointer user_data) {
 
 	twb_web_view *twv = twb_web_view_new(url);
 	gtk_overlay_add_overlay(GTK_OVERLAY(overlay), GTK_WIDGET(twv->box));
+	gtk_widget_grab_focus(GTK_WIDGET(twv->webview));
 }
 
 
