@@ -23,9 +23,12 @@ static gboolean decide_policy_cb(WebKitWebView *wv, WebKitPolicyDecision *de, We
 	case WEBKIT_POLICY_DECISION_TYPE_NEW_WINDOW_ACTION: {
 		WebKitNavigationPolicyDecision *navigation_decision = WEBKIT_NAVIGATION_POLICY_DECISION(de);
 		g_print("Opening a new window...\n");
+		/* TODO: IMPLEMENT */
+		break;
 	}
 	case WEBKIT_POLICY_DECISION_TYPE_RESPONSE:
 		WebKitResponsePolicyDecision *response = WEBKIT_RESPONSE_POLICY_DECISION(de);
+		/* TODO: IMPLEMENT */
 		break;
 	default:
 		return FALSE;
