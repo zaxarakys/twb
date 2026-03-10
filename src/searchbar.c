@@ -8,8 +8,8 @@ static void search_bar_enter (GtkEntry *search_bar, gpointer user_data) {
 	g_print("Loading: %s\n", url);
 	gtk_widget_set_visible(GTK_WIDGET(search_bar), FALSE);
 
-	WebKitWebView *webview = create_web_view(url);
-	gtk_overlay_add_overlay(GTK_OVERLAY(overlay), GTK_WIDGET(webview));
+	twb_web_view *twv = twb_web_view_new(url);
+	gtk_overlay_add_overlay(GTK_OVERLAY(overlay), GTK_WIDGET(twv->box));
 }
 
 
