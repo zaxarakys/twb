@@ -10,7 +10,7 @@ deps = [
 sources = [
   'src/main.c',
   'src/searchbar.c',
-  'src/webkitutils.c'
+  'src/webview.c'
 ]
 
 inc = include_directories('./src')
