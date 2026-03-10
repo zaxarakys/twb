@@ -19,11 +19,9 @@ twb_web_view *twb_web_view_new(const gchar *url) {
 
 	twv->bar = gtk_entry_new();
 
-
-
+	gtk_editable_set_text(GTK_EDITABLE(twv->bar), url);
 
 	gtk_box_append(GTK_BOX(twv->box), twv->bar);
 	gtk_box_append(GTK_BOX(twv->box), GTK_WIDGET(twv->webview));
-
   return twv;
 }
