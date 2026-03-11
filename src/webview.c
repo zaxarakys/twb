@@ -36,6 +36,13 @@ static gboolean decide_policy_cb(WebKitWebView *wv, WebKitPolicyDecision *de, We
 	return TRUE;
 }
 
+static gboolean url_bar_activate_cb(GtkEntry *entry, WebKitWebView *wv){
+	const gchar *redir_url = gtk_editable_get_text(GTK_EDITABLE(entry));
+	webkit_web_view_load_uri(wv, redir_url);
+	gtk_widget_grab_focus(GTK_WIDGET(wv));
+	return TRUE;
+}
+
 twb_web_view *twb_web_view_new(const gchar *url) {
 	twb_web_view *twv = malloc(sizeof(*twv));
 	twv->box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -48,6 +55,7 @@ twb_web_view *twb_web_view_new(const gchar *url) {
 	twv->bar = gtk_entry_new();
 
 	g_signal_connect(GTK_WIDGET(twv->webview), "decide-policy", G_CALLBACK(decide_policy_cb), twv->bar);
+	g_signal_connect(GTK_WIDGET(twv->bar), "activate", G_CALLBACK(url_bar_activate_cb), twv->webview);
 
 	/* gtk_editable_set_text(GTK_EDITABLE(twv->bar), url); */
 
