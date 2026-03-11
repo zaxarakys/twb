@@ -11,13 +11,8 @@ static WebKitWebView *create_web_view(const gchar *url) {
 static gboolean decide_policy_cb(WebKitWebView *wv, WebKitPolicyDecision *de, WebKitPolicyDecisionType ty, GtkWidget *entry){
 	switch(ty) {
 	case WEBKIT_POLICY_DECISION_TYPE_NAVIGATION_ACTION: {
-		WebKitNavigationPolicyDecision *navigation_decision = WEBKIT_NAVIGATION_POLICY_DECISION(de);
-		const gchar *redir_url = webkit_uri_request_get_uri(
-				webkit_navigation_action_get_request(
-				webkit_navigation_policy_decision_get_navigation_action(navigation_decision)
-			));
-		g_print("Redirecting to %s...\n", redir_url);
-		gtk_editable_set_text(GTK_EDITABLE(entry), redir_url);
+		/* WebKitNavigationPolicyDecision *navigation_decision = WEBKIT_NAVIGATION_POLICY_DECISION(de); */
+		g_print("Redirecting...\n");
 		break;
 	}
 	case WEBKIT_POLICY_DECISION_TYPE_NEW_WINDOW_ACTION: {
@@ -33,6 +28,12 @@ static gboolean decide_policy_cb(WebKitWebView *wv, WebKitPolicyDecision *de, We
 	default:
 		return FALSE;
 	}
+	return TRUE;
+}
+
+static gboolean redirect_cb(WebKitWebView *wv, GParamSpec *pspec, GtkEntry *entry){
+	g_print("Loaded %s\n", webkit_web_view_get_uri(wv));
+	gtk_editable_set_text(GTK_EDITABLE(entry), webkit_web_view_get_uri(wv));
 	return TRUE;
 }
 
@@ -56,6 +57,7 @@ twb_web_view *twb_web_view_new(const gchar *url) {
 
 	g_signal_connect(GTK_WIDGET(twv->webview), "decide-policy", G_CALLBACK(decide_policy_cb), twv->bar);
 	g_signal_connect(GTK_WIDGET(twv->bar), "activate", G_CALLBACK(url_bar_activate_cb), twv->webview);
+	g_signal_connect(GTK_WIDGET(twv->webview), "notify::uri", G_CALLBACK(redirect_cb), twv->bar);
 
 	/* gtk_editable_set_text(GTK_EDITABLE(twv->bar), url); */
 
