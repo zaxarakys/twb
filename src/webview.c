@@ -55,11 +55,12 @@ twb_web_view *twb_web_view_new(const gchar *url) {
 
 	twv->bar = gtk_entry_new();
 
+	gtk_editable_set_text(GTK_EDITABLE(twv->bar), url);
+
 	g_signal_connect(GTK_WIDGET(twv->webview), "decide-policy", G_CALLBACK(decide_policy_cb), twv->bar);
 	g_signal_connect(GTK_WIDGET(twv->bar), "activate", G_CALLBACK(url_bar_activate_cb), twv->webview);
 	g_signal_connect(GTK_WIDGET(twv->webview), "notify::uri", G_CALLBACK(redirect_cb), twv->bar);
 
-	/* gtk_editable_set_text(GTK_EDITABLE(twv->bar), url); */
 
 	gtk_box_append(GTK_BOX(twv->box), twv->bar);
 	gtk_box_append(GTK_BOX(twv->box), GTK_WIDGET(twv->webview));
