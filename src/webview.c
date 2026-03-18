@@ -1,9 +1,32 @@
+#include <unistd.h>
 #include "webview.h"
 #include "gtk/gtk.h"
 #include "twb.h"
 
 static WebKitWebView *create_web_view(const gchar *url) {
-	WebKitWebView *webview = WEBKIT_WEB_VIEW(webkit_web_view_new());
+	WebKitWebContext *context = webkit_web_context_new();
+	
+	/* Adding pulse and pipewire paths to sandbox so sound works */
+	gchar *pulse_path = g_strdup_printf("/run/user/%u/pulse", (unsigned int)getuid());
+	gchar *pipewire_path = g_strdup_printf("/run/user/%u/pipewire-0", (unsigned int)getuid());
+
+	webkit_web_context_add_path_to_sandbox(context, pulse_path, TRUE);
+	webkit_web_context_add_path_to_sandbox(context, pipewire_path, TRUE);
+
+	g_free(pulse_path);
+	g_free(pipewire_path);
+
+	WebKitWebView *webview =
+		WEBKIT_WEB_VIEW(
+			g_object_new(WEBKIT_TYPE_WEB_VIEW, "web-context", context, NULL)
+		);
+
+	/*
+	 * Unref context because refcount is 2 from webkit_web_context_new and
+	 * g_object_new
+	 */
+	g_object_unref(context);
+
 	webkit_web_view_load_uri(webview, url);
 	return webview;
 }
