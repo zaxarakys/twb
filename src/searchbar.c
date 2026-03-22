@@ -25,7 +25,10 @@ static void search_bar_enter (GtkEntry *search_bar, gpointer user_data) {
 	g_print("Loading: %s\n", url);
 	gtk_widget_set_visible(GTK_WIDGET(search_bar), FALSE);
 
-	twb_web_view *twv = twb_web_view_new(url);
+	gchar *url_correct = parse_url(url);
+
+	twb_web_view *twv = twb_web_view_new(url_correct);
+	g_free(url_correct);
 	gtk_overlay_set_child(GTK_OVERLAY(overlay), GTK_WIDGET(twv->box));
 	gtk_widget_grab_focus(GTK_WIDGET(twv->webview));
 }
