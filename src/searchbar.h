@@ -3,5 +3,6 @@
 
 void search_bar_setup (GtkWidget *search_bar, GtkWidget *overlay);
 void search_bar_action (GSimpleAction *action, GVariant *param, gpointer user_data);
+gchar *parse_url(const gchar *url);
 
 #endif /* SEARCHBAR_H */
