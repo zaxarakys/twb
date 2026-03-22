@@ -1,5 +1,22 @@
 #include "twb.h"
 #include "webview.h"
+#include <string.h>
+#include <curl/curl.h>
+
+static gchar *parse_url (const gchar *txt) {
+	if(!strstr(txt, "://")) {
+		/* TODO: user can change default search engine in config */
+		/* TODO use libpsl to check for domains more specifically? */
+		CURL *curl = curl_easy_init();
+		if(!curl) return g_strdup_printf("https://duckduckgo.com/?q=%s", txt);
+		char *escaped = curl_easy_escape(curl, txt, 0);
+		gchar *url = g_strdup_printf("https://duckduckgo.com/?q=%s", escaped);
+		curl_free(escaped);
+		curl_easy_cleanup(curl);
+		return url;
+	}
+	return g_strdup(txt);
+}
 
 static void search_bar_enter (GtkEntry *search_bar, gpointer user_data) {
 	const gchar *url = gtk_editable_get_text(GTK_EDITABLE(search_bar));
