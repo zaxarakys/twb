@@ -3,7 +3,7 @@
 #include <string.h>
 #include <curl/curl.h>
 
-static gchar *parse_url (const gchar *txt) {
+gchar *parse_url (const gchar *txt) {
 	if(!strstr(txt, "://")) {
 		/* TODO: user can change default search engine in config */
 		/* TODO use libpsl to check for domains more specifically? */

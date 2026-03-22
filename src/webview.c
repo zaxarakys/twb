@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include "webview.h"
-#include "gtk/gtk.h"
 #include "twb.h"
+#include "searchbar.h"
 
 static WebKitWebView *create_web_view(const gchar *url) {
 	WebKitWebContext *context = webkit_web_context_new();
@@ -62,7 +62,9 @@ static gboolean redirect_cb(WebKitWebView *wv, GParamSpec *pspec, GtkEntry *entr
 
 static gboolean url_bar_activate_cb(GtkEntry *entry, WebKitWebView *wv){
 	const gchar *redir_url = gtk_editable_get_text(GTK_EDITABLE(entry));
-	webkit_web_view_load_uri(wv, redir_url);
+	gchar *redir_url_correct = parse_url(redir_url);
+	webkit_web_view_load_uri(wv, redir_url_correct);
+	g_free(redir_url_correct);
 	gtk_widget_grab_focus(GTK_WIDGET(wv));
 	return TRUE;
 }
